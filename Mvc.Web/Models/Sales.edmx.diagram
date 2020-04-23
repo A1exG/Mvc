@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6ccbe0d5cfe541949ee52e050f7eddb4" Name="Diagram1">
+        <EntityTypeShape EntityType="AnseremDbModel.Sales" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnseremDbModel.Сities" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnseremDbModel.Сontacts" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AnseremDbModel.Сounterpartys" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <AssociationConnector Association="AnseremDbModel.FK_Sales_Сities" ManuallyRouted="false" />
+        <AssociationConnector Association="AnseremDbModel.FK_Sales_Сontacts" ManuallyRouted="false" />
+        <AssociationConnector Association="AnseremDbModel.FK_Sales_Сounterpartys" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

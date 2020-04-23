@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AnseremDbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="SaleId" />
+          </Key>
+          <Property Name="SaleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SaleName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="СounterpartyId" Type="int" Nullable="false" />
+          <Property Name="ContactId" Type="int" Nullable="false" />
+          <Property Name="CityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сities">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сontacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CounterpartyContact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SalerContact" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сounterpartys">
+          <Key>
+            <PropertyRef Name="СounterpartyId" />
+          </Key>
+          <Property Name="СounterpartyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="СounterpartyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Sales_Сities">
+          <End Role="Сities" Type="Self.Сities" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сities">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Сontacts">
+          <End Role="Сontacts" Type="Self.Сontacts" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сontacts">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Сounterpartys">
+          <End Role="Сounterpartys" Type="Self.Сounterpartys" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сounterpartys">
+              <PropertyRef Name="СounterpartyId" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="СounterpartyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AnseremDbModelContainer">
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сities" EntityType="Self.Сities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сontacts" EntityType="Self.Сontacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сounterpartys" EntityType="Self.Сounterpartys" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Sales_Сities" Association="Self.FK_Sales_Сities">
+            <End Role="Сities" EntitySet="Сities" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Сontacts" Association="Self.FK_Sales_Сontacts">
+            <End Role="Сontacts" EntitySet="Сontacts" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Сounterpartys" Association="Self.FK_Sales_Сounterpartys">
+            <End Role="Сounterpartys" EntitySet="Сounterpartys" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AnseremDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="SaleId" />
+          </Key>
+          <Property Name="SaleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SaleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="СounterpartyId" Type="Int32" Nullable="false" />
+          <Property Name="ContactId" Type="Int32" Nullable="false" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Сities" Relationship="Self.FK_Sales_Сities" FromRole="Sales" ToRole="Сities" />
+          <NavigationProperty Name="Сontacts" Relationship="Self.FK_Sales_Сontacts" FromRole="Sales" ToRole="Сontacts" />
+          <NavigationProperty Name="Сounterpartys" Relationship="Self.FK_Sales_Сounterpartys" FromRole="Sales" ToRole="Сounterpartys" />
+        </EntityType>
+        <EntityType Name="Сities">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sales_Сities" FromRole="Сities" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="Сontacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CounterpartyContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SalerContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sales_Сontacts" FromRole="Сontacts" ToRole="Sales" />
+        </EntityType>
+        <EntityType Name="Сounterpartys">
+          <Key>
+            <PropertyRef Name="СounterpartyId" />
+          </Key>
+          <Property Name="СounterpartyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="СounterpartyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sales" Relationship="Self.FK_Sales_Сounterpartys" FromRole="Сounterpartys" ToRole="Sales" />
+        </EntityType>
+        <Association Name="FK_Sales_Сities">
+          <End Role="Сities" Type="Self.Сities" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сities">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Сontacts">
+          <End Role="Сontacts" Type="Self.Сontacts" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сontacts">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="ContactId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_Сounterpartys">
+          <End Role="Сounterpartys" Type="Self.Сounterpartys" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Сounterpartys">
+              <PropertyRef Name="СounterpartyId" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="СounterpartyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AnseremDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Sales" EntityType="Self.Sales" />
+          <EntitySet Name="Сities" EntityType="Self.Сities" />
+          <EntitySet Name="Сontacts" EntityType="Self.Сontacts" />
+          <EntitySet Name="Сounterpartys" EntityType="Self.Сounterpartys" />
+          <AssociationSet Name="FK_Sales_Сities" Association="Self.FK_Sales_Сities">
+            <End Role="Сities" EntitySet="Сities" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Сontacts" Association="Self.FK_Sales_Сontacts">
+            <End Role="Сontacts" EntitySet="Сontacts" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_Сounterpartys" Association="Self.FK_Sales_Сounterpartys">
+            <End Role="Сounterpartys" EntitySet="Сounterpartys" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AnseremDbModelContainer" CdmEntityContainer="AnseremDbEntities">
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="AnseremDbModel.Sales">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="SaleId" ColumnName="SaleId" />
+                <ScalarProperty Name="SaleName" ColumnName="SaleName" />
+                <ScalarProperty Name="СounterpartyId" ColumnName="СounterpartyId" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сities">
+            <EntityTypeMapping TypeName="AnseremDbModel.Сities">
+              <MappingFragment StoreEntitySet="Сities">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сontacts">
+            <EntityTypeMapping TypeName="AnseremDbModel.Сontacts">
+              <MappingFragment StoreEntitySet="Сontacts">
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="CounterpartyContact" ColumnName="CounterpartyContact" />
+                <ScalarProperty Name="SalerContact" ColumnName="SalerContact" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сounterpartys">
+            <EntityTypeMapping TypeName="AnseremDbModel.Сounterpartys">
+              <MappingFragment StoreEntitySet="Сounterpartys">
+                <ScalarProperty Name="СounterpartyId" ColumnName="СounterpartyId" />
+                <ScalarProperty Name="СounterpartyName" ColumnName="СounterpartyName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

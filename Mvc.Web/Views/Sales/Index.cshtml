@@ -4,12 +4,13 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Продажи</h2>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Добавление новой продажи", "Create")
 </p>
-<table class="table">
+<table class="table table-bordered table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.SaleName)
@@ -26,26 +27,63 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SaleName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Сities.CityName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Сontacts.CounterpartyContact)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Сounterpartys.СounterpartyName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SaleId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SaleId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SaleId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <span class="item-display">
+                    @Html.DisplayFor(modelItem => item.SaleName)
+                </span>
+                <span class="item-field">
+                    @Html.EditorFor(modelItem => item.SaleName)
+                </span>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Сities.CityName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Сontacts.CounterpartyContact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Сounterpartys.СounterpartyName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SaleId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.SaleId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.SaleId })
 
+                <input type="button" class="btn btn-lg btn-primary btn-sm" id="btnEditSale" value="Редактировать" />
+
+                @using (Html.BeginForm("MyAction", "Sales", FormMethod.Post))
+                {
+                    <input type="button" class="btn btn-lg btn-primary btn-sm" id="btnSaveSale" value="Сохранить" hidden />
+                }
+
+
+
+
+            </td>
+        </tr>
+    }
 </table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#btnEditSale').click(function (event) {
+                event.preventDefault();
+                $('#btnEditSale').prop('disabled', true);
+                $('#btnSaveSale').attr("hidden", false)
+            });
+        });
+    });
+</script>
+
+<style type="text/css">
+    span.item-field {
+        display: none;
+    }
+    [hidden] {
+        display: none;
+    }
+</style>

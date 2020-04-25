@@ -10,7 +10,7 @@
 <p>
     @Html.ActionLink("Добавление новой продажи", "Create")
 </p>
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover" id="salesTable">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.SaleName)
@@ -31,37 +31,46 @@
     {
         <tr>
             <td>
-                <span class="item-display">
+                <span class="spanViz" style="visibility :visible">
                     @Html.DisplayFor(modelItem => item.SaleName)
                 </span>
-                <span class="item-field">
+                <span class="spanInv" style="visibility :hidden">
                     @Html.EditorFor(modelItem => item.SaleName)
                 </span>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Сities.CityName)
+                <span class="spanViz" style="visibility :visible">
+                    @Html.DisplayFor(modelItem => item.Сities.CityName)
+                </span>
+                <span class="spanInv" style="visibility :hidden">
+                    @Html.EditorFor(modelItem => item.Сities.CityName)
+                </span>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Сontacts.CounterpartyContact)
+                <span class="spanViz" style="visibility :visible">
+                    @Html.DisplayFor(modelItem => item.Сontacts.CounterpartyContact)
+                </span>
+                <span class="spanInv" style="visibility :hidden">
+                    @Html.EditorFor(modelItem => item.Сontacts.CounterpartyContact)
+                </span>
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Сounterpartys.СounterpartyName)
+                <span class="spanViz" style="visibility :visible">
+                    @Html.DisplayFor(modelItem => item.Сounterpartys.СounterpartyName)
+                </span>
+                <span class="spanInv" style="visibility :hidden">
+                    @Html.EditorFor(modelItem => item.Сounterpartys.СounterpartyName)
+                </span>
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.SaleId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.SaleId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.SaleId })
-
+                
+            </td>
+            <td>
                 <input type="button" class="btn btn-lg btn-primary btn-sm" id="btnEditSale" value="Редактировать" />
-
-                @using (Html.BeginForm("MyAction", "Sales", FormMethod.Post))
-                {
-                    <input type="button" class="btn btn-lg btn-primary btn-sm" id="btnSaveSale" value="Сохранить" hidden />
-                }
-
-
-
-
+                <input type="button" class="btn btn-lg btn-primary btn-sm" id="btnSaveSale" value="Сохранить" hidden />
             </td>
         </tr>
     }
@@ -73,15 +82,47 @@
             $('#btnEditSale').click(function (event) {
                 event.preventDefault();
                 $('#btnEditSale').prop('disabled', true);
-                $('#btnSaveSale').attr("hidden", false)
+                $('#btnSaveSale').attr("hidden", false);
+
+                var $spanInv = $('.spanInv');
+                var $spanViz = $('.spanViz');
+
+                if ($spanInv.css('visibility') === 'hidden') {
+                    $spanInv.css('visibility', 'visible');
+                    $spanViz.css('visibility', 'hidden');
+                }
             });
         });
     });
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(function () {
+            $('#btnSaveSale').click(function (event) {
+                event.preventDefault();
+                $('#btnSaveSale').attr("hidden", true);
+
+                var $spanInv = $('.spanInv');
+                var $spanViz = $('.spanViz');
+
+                if ($spanInv.css('visibility') === 'visible') {
+                    $spanInv.css('visibility', 'hidden');
+                    $spanViz.css('visibility', 'visible');
+                    $('#btnEditSale').prop('disabled', false);
+                }
+            });
+        });
+    });
+</script>
+
+
 <style type="text/css">
-    span.item-field {
-        display: none;
+    td.spanInv {
+        visibility: hidden;
+    }
+    td.spanViz {
+        visibility: visible;
     }
     [hidden] {
         display: none;
